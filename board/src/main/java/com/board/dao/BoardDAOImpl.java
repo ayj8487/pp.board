@@ -38,4 +38,11 @@ public class BoardDAOImpl implements BoardDAO {
 		sql.insert(namespce + ".write", vo);
 	}
 
+	//게시물 조회
+	@Override
+	public BoardVO view(int bno) throws Exception {
+
+		return sql.selectOne(namespce + ".view", bno);
+	}
+
 }

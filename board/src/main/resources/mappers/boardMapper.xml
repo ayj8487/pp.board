@@ -29,4 +29,17 @@
    values(#{title}, #{content}, #{writer})
 </insert>
 
+<!-- 게시물 조회 -->
+<select id="view" parameterType="int" resultType="com.board.domain.BoardVO">
+ select 
+	  bno, title, content, writer, regDate, viewCnt
+ from 
+	  tbl_board
+ where
+	  bno = #{bno}   
+</select>
+<!-- 파라미터 타입(parameterType)은 매퍼에 들어오는 데이터, 
+	 리설트 타입(resultType)은 매퍼가 내보내는 데이터.
+정수(int)형인 게시물 번호를보내고 게시물의 데이터형인 BoardVO를 내보냄. -->
+
 </mapper>

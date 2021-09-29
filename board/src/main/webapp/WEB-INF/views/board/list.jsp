@@ -24,11 +24,15 @@
 
 	 
 	 <tbody>
+
  
  <c:forEach items="${list}" var="list">
 	 <tr>
 	  <td>${list.bno}</td>
-	  <td>${list.title}</td>
+	  <td>
+	   <a href="/board/view?bno=${list.bno}">${list.title}</a>
+	  </td>
+	  <!-- 주소의 파라미터값을 컨트롤러에 전달  -->
 	  <td>${list.regDate}</td>
 	  <td>${list.writer}</td>
 	  <td>${list.viewCnt}</td>
