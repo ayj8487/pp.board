@@ -65,5 +65,23 @@ public class BoardController {
 		
 		model.addAttribute("view", vo);
 	}
+	//게시물 수정 - 수정페이지에 기존게시물 보여주기
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void getModify(@RequestParam("bno") int bno, Model model) throws Exception{
+		
+		BoardVO vo = service.view(bno);
+		
+		model.addAttribute("view", vo);
+	}
+	// 게시물 수정
 	
+	//service.bodify(vo)에서 뷰에서 컨트롤러로 넘어온 데이터(BoardVO)
+	//를 이용해 수정을 끝내고 현재 bno에 해당되는 조회페이지로 이동
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String postModify(BoardVO vo) throws Exception {
+
+	 service.modify(vo);
+	   
+	 return "redirect:/board/view?bno=" + vo.getBno();
+	}
 }

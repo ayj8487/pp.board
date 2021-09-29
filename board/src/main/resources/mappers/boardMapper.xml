@@ -42,4 +42,14 @@
 	 리설트 타입(resultType)은 매퍼가 내보내는 데이터.
 정수(int)형인 게시물 번호를보내고 게시물의 데이터형인 BoardVO를 내보냄. -->
 
+<!-- 게시물 수정 -->
+<update id="modify" parameterType="com.board.domain.BoardVO" >
+ update tbl_board
+	  set
+  		 title = #{title},
+  		 content = #{content},
+   		 writer = #{writer}
+ 	 where bno = #{bno}
+</update>
+
 </mapper>
