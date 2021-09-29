@@ -4,4 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.mappers.board">
 
+<!-- id는 매퍼내에서 쿼리를 구분짓는 고유이름 -->
+<!--  resultType은 쿼리의 결과의 형태 -->
+
+<!-- Request processing failed; nested exception is org.springframework.jdbc.UncategorizedSQLException: -->
+<!-- 실행시 위의 500오류 발생시 테이블을 찾을수 없다는 오류이며  -->
+<!-- 테이블 앞에 데이터베이스명을 붙히면 해결 -->
+<!-- from tbl_board => from board.tbl_board -->
+
+<!-- 현재 프로젝트에서는 board하나만 사용하므로 쿼리문마다 board를 붙히지않고  -->
+<!--  root-context.xml의 접속주소에 데이터베이스명을 미리 입력해주면 해결 할수있다. -->
+<!-- Ex) value="jdbc:mariadb://127.0.0.1:3305/board -->	
+	
+	<!-- 게시물 목록 -->
+<select id="list" resultType="com.board.domain.BoardVO">
+ select
+  	bno, title, content, writer, regDate, viewCnt
+ from tbl_board
+</select>
+
 </mapper>
