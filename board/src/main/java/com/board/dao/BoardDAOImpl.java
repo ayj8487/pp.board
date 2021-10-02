@@ -52,4 +52,11 @@ public class BoardDAOImpl implements BoardDAO {
 		sql.update(namespce + ".modify", vo);
 	}
 
+	//게시물 삭제
+	@Override
+	public void delete(int bno) throws Exception {
+
+		sql.delete(namespce + ".delete", bno);
+	}
+
 }
