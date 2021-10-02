@@ -7,6 +7,12 @@
 <title>게시물 조회</title>
 </head>
 <body>
+
+<div id="nav">
+	<%@ include file="../include/nav.jsp" %>
+</div>
+
+
 <!-- 컨트롤러에서 전달받은 모델(model)명인 view를 이용해 출력 -->
 
 <label>제목</label>

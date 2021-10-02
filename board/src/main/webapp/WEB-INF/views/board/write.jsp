@@ -8,6 +8,11 @@
 </head>
 <body>
 
+<div id="nav">
+	<%@ include file="../include/nav.jsp" %>
+</div>
+
+
 <!-- 입력 엘리먼트인 <input>과 <textarea>의 
 이름(name)속성의 값이 BoardVO와 동일해야함. -->
 
