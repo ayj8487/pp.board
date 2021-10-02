@@ -59,4 +59,18 @@
  where bno = #{bno}
 </delete>
 
+<!-- 게시물 총 갯수 -->
+<select id="count" resultType="int">
+ select count(bno) from tbl_board
+</select>
+
+<!-- 게시물 목록 + 페이징(10개씩) -->
+<select id="listPage" parameterType="hashMap" resultType="com.board.domain.BoardVO">
+ select
+  bno, title, writer, regDate, viewCnt
+ from tbl_board
+ order by bno desc
+  limit #{displayPost}, #{postNum}
+</select>
+
 </mapper>
