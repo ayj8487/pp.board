@@ -182,7 +182,16 @@ public class BoardController {
 	 Page page = new Page();
 	 
 	 page.setNum(num);
-	 page.setCount(service.count());  
+	 
+	 //-- 검색 -- 검색적용후 게시물갯수 추가 후 주석 
+	 //page.setCount(service.count());  
+	 page.setCount(service.searchCount(searchType, keyword));
+	 
+	 // 검색 타입과 검색어
+	 // page.setSearchTypeKeyword(searchType, keyword);
+	 page.setSearchType(searchType);
+	 page.setKeyword(keyword);
+	 //--까지-- 
 	 
 	 List<BoardVO> list = null; 
 	 //list = service.listPage(page.getDisplayPost(), page.getPostNum());
@@ -192,5 +201,8 @@ public class BoardController {
 	 model.addAttribute("page", page);
 	 model.addAttribute("select", num);
 	 
+	 //검색후 검색조건과 검색어를 유지, page클래스로 코드 분리 후 주석
+	 // model.addAttribute("searchType", searchType);
+	 // model.addAttribute("keyword", keyword);
 	}
 }
