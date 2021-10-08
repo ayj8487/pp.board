@@ -53,13 +53,14 @@
 	
 	</table>
 
-<!-- 페이징 코드 (하단페이징 갯수 수정) -->
+<!-- 페이징 코드 (하단페이징 갯수 수정 ) -->
+<!-- 페이징 코드를 Page클래스로 분리하여 변수명 앞에 page. 를 추가하여 page클래스를 호출 할수 있다 -->
 <div>
-<c:if test="${prev}">
- <span>[ <a href="/board/listPage?num=${startPageNum - 1}">이전</a> ]</span>
+<c:if test="${page.prev}">
+ <span>[ <a href="/board/listPage?num=${page.startPageNum - 1}">이전</a> ]</span>
 </c:if>
 
-<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
   <span>
  
   <c:if test="${select != num}">
@@ -75,8 +76,8 @@
  </span>
 </c:forEach>
 
-<c:if test="${next}">
- <span>[ <a href="/board/listPage?num=${endPageNum + 1}">다음</a> ]</span>
+<c:if test="${page.next}">
+ <span>[ <a href="/board/listPage?num=${page.endPageNum + 1}">다음</a> ]</span>
 </c:if>
 </div>
 
