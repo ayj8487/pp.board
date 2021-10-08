@@ -75,3 +75,11 @@ limit 0, 10;
 
 select count(bno) from tbl_board;
 
+# 검색기능 쿼리 
+-- 제목+내용 검색
+
+ SELECT 
+ bno, title, content, writer, regDate, viewCnt
+ FROM tbl_board
+ WHERE title LIKE '%테스트%'
+ OR content LIKE '%test%' ;
