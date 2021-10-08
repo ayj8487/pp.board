@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.domain.BoardVO;
 import com.board.domain.Page;
+import com.board.domain.ReplyVO;
 import com.board.service.BoardService;
+import com.board.service.ReplyService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -21,6 +22,9 @@ public class BoardController {
 
 	@Inject
 	private BoardService service;
+	
+	@Inject
+	private ReplyService replyService;
 	
 	// get메서드 서버 => 사용자
 	// post메서드 사용자 => 서버 (게시물작성)
@@ -65,6 +69,11 @@ public class BoardController {
 		BoardVO vo = service.view(bno);
 		
 		model.addAttribute("view", vo);
+		
+		// 댓글 조회 추가
+		List<ReplyVO> reply = null;
+		reply = replyService.list(bno);
+		model.addAttribute("reply", reply);
 	}
 	//게시물 수정 - 수정페이지에 기존게시물 보여주기
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
