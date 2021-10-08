@@ -73,4 +73,33 @@
   limit #{displayPost}, #{postNum}
 </select>
 
+<!-- 게시물 목록 + 페이징 + 검색(listPageSearch는 컨트롤러의 listPage를 복사했기 때문에 매퍼도 복사해서 사용가능 -->
+<!-- concat 함수를 사용해 문자열을 합쳐서 사용해야 정확한 검색가능 -->
+<!-- 조건문을 이용해 searchType의 값에 따라 제목,내용,제목+내용,작성자를 구분 -->
+<select id="listPageSearch" parameterType="hashMap" resultType="com.board.domain.BoardVO">
+ select
+  bno, title, writer, regDate, viewCnt
+ from tbl_board
+ 
+ <if test='searchType.equals("title")'>
+  WHERE title LIKE concat('%', #{keyword}, '%')
+ </if>
+ 
+ <if test='searchType.equals("content")'>
+  WHERE content LIKE concat('%', #{keyword}, '%')
+ </if>
+ 
+ <if test='searchType.equals("title_content")'>
+  WHERE title LIKE concat('%', #{keyword}, '%') 
+   or content LIKE concat('%', #{keyword}, '%')
+ </if>
+ 
+ <if test='searchType.equals("writer")'>
+  WHERE writer LIKE concat('%', #{keyword}, '%')
+ </if>
+ 
+ order by bno desc
+  limit #{displayPost}, #{postNum}
+</select> 
+
 </mapper>

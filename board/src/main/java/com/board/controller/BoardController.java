@@ -93,7 +93,7 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
-	// 게시물 목록 + 페이징 추가
+	// 게시물 목록 + 페이징 추가 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void getListPage(Model model, @RequestParam("num") int num) throws Exception {
 
@@ -102,7 +102,7 @@ public class BoardController {
 		page.setNum(num);
 		page.setCount(service.count());  
 
-		List list = null; 
+		List<BoardVO> list = null; 
 		list = service.listPage(page.getDisplayPost(), page.getPostNum());
 
 		model.addAttribute("list", list);   
@@ -169,4 +169,28 @@ public class BoardController {
 까지 */	
 
 	}	
+	
+	// 게시물 목록 + 페이징 추가 + 검색
+	@RequestMapping(value = "/listPageSearch", method = RequestMethod.GET)
+	public void getListPageSearch(Model model, @RequestParam("num") int num, 
+	     @RequestParam(value = "searchType",required = false, defaultValue = "title") String searchType,
+		 @RequestParam(value = "keyword",required = false, defaultValue = "") String keyword
+	  ) throws Exception {
+		
+	// 매게변수부에 @RequestParam("searchType")~~ 를통해
+	// url 을 통해 searchType과 keyword를 받아낼 수 있도록 함, value	
+	 Page page = new Page();
+	 
+	 page.setNum(num);
+	 page.setCount(service.count());  
+	 
+	 List<BoardVO> list = null; 
+	 //list = service.listPage(page.getDisplayPost(), page.getPostNum());
+	 list = service.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+	 
+	 model.addAttribute("list", list);
+	 model.addAttribute("page", page);
+	 model.addAttribute("select", num);
+	 
+	}
 }

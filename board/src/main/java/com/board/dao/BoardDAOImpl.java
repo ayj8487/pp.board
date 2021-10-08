@@ -76,14 +76,28 @@ public class BoardDAOImpl implements BoardDAO {
 		 
 		 // ** DAO와 매퍼에서는 데이터를 하나만 전송할 수 있기 때문에 
 		 // 2개 이상의 데이터를 다룰 때는 VO(Value Object)를 사용하거나 해시맵을 이용.
-		 HashMap data = new HashMap();
+		 HashMap<String , Integer> data = new HashMap<String, Integer>();
 		 
 		 data.put("displayPost", displayPost);
 		 data.put("postNum", postNum);
 		  
 		 return sql.selectList(namespce + ".listPage", data);
 	}
-	
-	
+
+	// 게시물 목록 + 페이징 + 검색
+	@Override
+	public List<BoardVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword)
+			throws Exception {
+
+		  HashMap<String, Object> data = new HashMap<String, Object>();
+		  
+		  data.put("displayPost", displayPost);
+		  data.put("postNum", postNum);
+		  
+		  data.put("searchType", searchType);
+		  data.put("keyword", keyword);
+		  
+		  return sql.selectList(namespce + ".listPageSearch", data);
+		 }
 
 }
