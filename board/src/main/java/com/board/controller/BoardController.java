@@ -108,10 +108,45 @@ public class BoardController {
 	  
 	 // 4. 현재 페이지를 기준으로 10개의 데이터를 출력
 	 int displayPost = (num - 1) * postNum;
-	    
+	 
+	 // 1. 페이징 갯수 (한번에 표시할 페이징 번호의 갯수)
+	 int pageNum_cnt = 10;
+
+	 // 2. 표시되는 페이지 번호 중 마지막 번호
+	 int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+	 
+//	 마지막 페이지 번호 = 
+// 	((올림)(현재 페이지 번호 / 한번에 표시할 페이지 번호의 갯수)) * 
+//	 한번에 표시할 페이지 번호의 갯수 
+
+	 // 3. 표시되는 페이지 번호 중 첫번째 번호
+	 int startPageNum = endPageNum - (pageNum_cnt - 1);
+
+//	 시작 페이지 = 마지막 페이지 번호 - 한번에 표시할 페이지 번호의 갯수 + 1	 
+	 
+	 // 4. 마지막 번호 재계산 (마지막 번호는 한번더 계산할 필요가 있다)
+	 int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNum_cnt));
+	  
+	 if(endPageNum > endPageNum_tmp) {
+	  endPageNum = endPageNum_tmp;
+	 }
+	 boolean prev = startPageNum == 1 ? false : true;
+	 boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+	 
 	 List<BoardVO> list = null; 
 	 list = service.listPage(displayPost, postNum);
 	 model.addAttribute("list", list);   
 	 model.addAttribute("pageNum", pageNum);
+	
+	 // 시작 및 끝 번호
+	 model.addAttribute("startPageNum", startPageNum);
+	 model.addAttribute("endPageNum", endPageNum);
+
+	 // 이전 및 다음 
+	 model.addAttribute("prev", prev);
+	 model.addAttribute("next", next);
+	 
+	 // 현재 페이지표시
+	 model.addAttribute("select", num);
 	}
 }
