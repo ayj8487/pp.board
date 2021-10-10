@@ -83,3 +83,35 @@ select count(bno) from tbl_board;
  FROM tbl_board
  WHERE title LIKE '%테스트%'
  OR content LIKE '%test%' ;
+
+# 댓글기능 테이블 쿼리
+CREATE TABLE tbl_reply (
+    rno         int             not null auto_increment,
+    bno         int             not null,
+    writer     varchar(30) not null,
+    content     text             not null,
+    regDate     timestamp     not null default now(),
+    PRIMARY KEY(rno, bno),
+    FOREIGN KEY(bno) REFERENCES tbl_board(bno)
+);
+
+rno : 댓글 고유번호
+bno : 댓글이 작성된 게시물의 번호
+ 게시물에 여러개의 댓글이 달릴 수 있으므로 rno,bno 2개의 컬럼에 pk설정
+ 
+ # 댓글 테이블 데이터 테스트 (현재 게시물의 번호가 실존해야함)
+INSERT INTO tbl_reply(bno,writer,content,regDate)
+VALUES(823, '댓글작성자','댓글내용',SYSDATE());
+
+UPDATE tbl_reply SET
+ writer = '댓글 작성자_수정',
+ content = '댓글 내용_수정'
+ WHERE rno = 1 
+  AND bno = 823;
+  
+DELETE FROM tbl_reply 
+WHERE rno = 1
+ AND bno = 823;
+
+# 고유번호(시퀀스) 초기화 
+ALTER TABLE tbl_board AUTO_INCREMENT=1;
