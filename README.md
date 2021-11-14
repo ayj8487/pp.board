@@ -113,5 +113,5 @@
   WHERE rno = 1
   AND bno = 823;
 
-## 고유번호(시퀀스) 초기화 
+## 고유번호(시퀀스) 초기화
   ALTER TABLE tbl_board AUTO_INCREMENT=1;
