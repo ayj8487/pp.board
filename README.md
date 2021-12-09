@@ -39,7 +39,7 @@
 
 ## 페이징
 
-## 인서트 셀렉트 문(현재 테이블의 모든 데이터를 재입력:복사) 페이징 테스트 
+## 인서트 셀렉트 문(현재 테이블의 모든 데이터를 재입력:복사) 페이징 테스트
 
   insert into tbl_board(title, content, writer)
   select title, content, writer from tbl_board
