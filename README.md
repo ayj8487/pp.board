@@ -3,7 +3,7 @@
 ### 스프링게시판 만들기
 ### MariaDB -게시판 테이블
 
-## 테이블 생성 
+## 테이블 생성
   create table tbl_board(
   bno int not null auto_increment,
   title varchar(50) not null,
@@ -21,7 +21,7 @@
   -- regDate : 작성일
   -- viewCnt : 조회수
 
-## 데이터 임시 삽입 
+## 데이터 임시 삽입
   insert into tbl_board(title, content, writer)
   values('테스트 제목1', '테스트 내용', '작성자');
 
