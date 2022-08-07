@@ -1,4 +1,4 @@
-# pp.board
+# pp.board 
 
 ### 스프링게시판 만들기
 ### MariaDB -게시판 테이블
